@@ -1,5 +1,5 @@
 {
-  "name": "Auth-server",
+  "name": "auth-server",
   "version": "1.0.0",
   "description": "Backend con Express, Token, Registro",
   "main": "index.js",

@@ -8,13 +8,7 @@ const app = express()
 app.set('port', process.env.PORT || 4000)
 
 // Routes
-app.get('/', ( req, res ) => {
-  res.json({
-    ok: true,
-    massage: 'All Success',
-    uid: 1234
-  })
-})
+app.use( '/api/auth', require('./routes/auth') )
 
 // Start Server
 app.listen(app.get('port'), () => {
