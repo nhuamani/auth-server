@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-console.log(process.env)
-
 
 // Initializations
 const app = express()
+
+// Views
+app.use( express.static('public'))
 
 // Settings
 app.set('port', process.env.PORT || 4001)
