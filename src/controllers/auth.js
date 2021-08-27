@@ -1,10 +1,19 @@
 const { response } = require('express');
+const { validationResult } = require('express-validator');
 
 // Create new User
 const createUser = ( req, res = response ) => {
 
-  const { email, name, password } = req.body
-  console.log(email, name, password)
+  const errors = validationResult(req)
+  if ( !errors.isEmpty() ) {
+    return res.status(400).json({
+      ok: false,
+      errors: errors.mapped()
+    });
+  }
+
+  const { firstname, lastname, email, password } = req.body
+  console.log(firstname, lastname, email, password)
 
   return res.json({
     ok: true,
@@ -14,7 +23,15 @@ const createUser = ( req, res = response ) => {
 }
 
 // Log In User
-const logIn = ( req, res ) => {
+const logIn = ( req, res = response ) => {
+
+  const errors = validationResult(req)
+  if ( !errors.isEmpty() ) {
+    return res.status(400).json({
+      ok: false,
+      errors: errors.mapped()
+    });
+  }
 
   const { email, password } = req.body
   console.log(email, password)
@@ -28,7 +45,7 @@ const logIn = ( req, res ) => {
 
 
 // Generate and refresh token
-const newToken = ( req, res ) => {
+const newToken = ( req, res = response ) => {
 
   return res.json({
     ok: true,
