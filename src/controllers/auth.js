@@ -3,6 +3,9 @@ const { response } = require('express');
 // Create new User
 const createUser = ( req, res = response ) => {
 
+  const { email, name, password } = req.body
+  console.log(email, name, password)
+
   return res.json({
     ok: true,
     message: 'Create New User'
@@ -13,8 +16,11 @@ const createUser = ( req, res = response ) => {
 // Log In User
 const logIn = ( req, res ) => {
 
+  const { email, password } = req.body
+  console.log(email, password)
+
   return res.json({
-    oh: true,
+    ok: true,
     message: 'Login of Users'
   })
 
@@ -25,7 +31,7 @@ const logIn = ( req, res ) => {
 const newToken = ( req, res ) => {
 
   return res.json({
-    oh: true,
+    ok: true,
     message: 'Generate New Token'
   })
 
