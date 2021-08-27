@@ -1,13 +1,18 @@
 {
-  "name": "Auth Server",
+  "name": "Auth-server",
   "version": "1.0.0",
   "description": "Backend con Express, Token, Registro",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "author": "nhuamani",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
