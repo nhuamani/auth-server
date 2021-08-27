@@ -1,12 +1,15 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
+
+console.log(process.env)
 
 
 // Initializations
 const app = express()
 
 // Settings
-app.set('port', process.env.PORT || 4000)
+app.set('port', process.env.PORT || 4001)
 
 // Middlewares
 app.use( cors() )           // Definir peticiones de un solo dominio de Frontend
