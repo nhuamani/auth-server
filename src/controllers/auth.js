@@ -107,15 +107,19 @@ const logIn = async ( req, res = response ) => {
 
 
 // Generate y/o Refresh TOKEN
-const newToken = async ( req, res = response ) => {
+const newToken = async( req, res = response ) => {
 
   const { uid, firstname } = req
+
+  // Generate JWT
+  const newtoken = await generateJWT( uid, firstname )
 
   return res.json({
     ok: true,
     message: 'Generate New Token',
     uid,
     firstname,
+    newtoken,
   })
 
 }
