@@ -59,14 +59,49 @@ const createUser = async ( req, res = response ) => {
 }
 
 // Log In User
-const logIn = ( req, res = response ) => {
+const logIn = async ( req, res = response ) => {
 
   const { email, password } = req.body
 
-  return res.json({
-    ok: true,
-    message: 'Login of Users'
-  })
+  try {
+
+    const  dbUser = await Usuario.findOne({ email: email })
+
+    if ( !dbUser ) {
+      return res.status(400).json({
+        ok: false,
+        message: 'El correo no esta registrado'
+      })
+    }
+
+    // Confirm if the password matches
+    const validPassword = bcrypt.compareSync( password, dbUser.password )
+
+    if ( !validPassword ) {
+      return res.status(400).json({
+        ok: false,
+        message: 'El Password no es válido'
+      })
+    }
+
+    // Generate JWT
+    const token = await generateJWT( dbUser.id, dbUser.lastname )
+
+    // Service response
+    return res.json({
+      ok: true,
+      uid: dbUser.id,
+      lastname: dbUser.lastname,
+      token
+    })
+
+  } catch (error) {
+      console.log(error)
+      return res.status(500).json({
+        ok: false,
+        message: 'Please contact the administrator'
+    })
+  }
 
 }
 
