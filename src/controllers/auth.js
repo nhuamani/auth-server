@@ -7,7 +7,7 @@ const { generateJWT } = require('../helpers/jwt');
 // Create new User
 const createUser = async ( req, res = response ) => {
 
-  const { firstname, email, password } = req.body
+  const { firstname, lastname, email, password } = req.body
 
   try {
 
@@ -31,7 +31,7 @@ const createUser = async ( req, res = response ) => {
 
 
   // Generate JWT
-  const token = await generateJWT( dbUser.id, dbUser.firstname )
+  const token = await generateJWT( dbUser.id, dbUser.firstname, dbUser.lastname )
 
 
   // Save user in DB
@@ -43,6 +43,7 @@ const createUser = async ( req, res = response ) => {
     success: true,
     uid: dbUser.id,
     firstname: firstname,
+    lastname: lastname,
     token: token,
   })
 
@@ -85,13 +86,14 @@ const logIn = async ( req, res = response ) => {
     }
 
     // Generate JWT
-    const token = await generateJWT( dbUser.id, dbUser.firstname )
+    const token = await generateJWT( dbUser.id, dbUser.firstname, dbUser.lastname )
 
     // Service response
     return res.json({
       success: true,
       uid: dbUser.id,
       firstname: dbUser.firstname,
+      lastname: dbUser.lastname,
       token
     })
 
@@ -109,16 +111,17 @@ const logIn = async ( req, res = response ) => {
 // Generate y/o Refresh TOKEN
 const newToken = async ( req, res = response ) => {
 
-  const { uid, firstname } = req
+  const { uid, firstname, lastname } = req
 
   // Generate JWT
-  const newtoken = await generateJWT( uid, firstname )
+  const newtoken = await generateJWT( uid, firstname, lastname )
 
   return res.json({
     success: true,
     message: 'Generate New Token',
     uid,
     firstname,
+    lastname,
     newtoken,
   })
 

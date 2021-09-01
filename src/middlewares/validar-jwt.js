@@ -15,10 +15,11 @@ const validarJWT = ( req, res = response, next ) => {
 
   try {
 
-    const { uid, firstname } = jwt.verify( token, process.env.SECRET_KEY_JWT )
+    const { uid, firstname, lastname } = jwt.verify( token, process.env.SECRET_KEY_JWT )
     console.log(uid, firstname)
     req.uid = uid
     req.firstname = firstname
+    req.lastname = lastname
 
   } catch (error) {
 
