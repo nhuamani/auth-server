@@ -16,7 +16,7 @@ const validarJWT = ( req, res = response, next ) => {
   try {
 
     const { uid, firstname, lastname } = jwt.verify( token, process.env.SECRET_KEY_JWT )
-    console.log(uid, firstname)
+    console.log(uid, firstname, lastname)
     req.uid = uid
     req.firstname = firstname
     req.lastname = lastname
