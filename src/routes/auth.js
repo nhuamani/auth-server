@@ -17,7 +17,7 @@ router.post('/new', [
   check('firstname', 'Nombre min. 3 letras').isLength({ min: 3 }).isAlpha().not().isEmpty(),
   check('lastname', 'Apellido min. 3 letras').isLength({ min: 3 }).isAlpha().not().isEmpty(),
   check('email', 'El email no es correcto').isEmail().normalizeEmail(),
-  check('password', 'Email valido min. 8 caracteres, min. una mayúscula, min. una minúscula y Al menos un caracter especial .!?@').isStrongPassword(),
+  check('password', 'Password valido min. 8 caracteres. Intenta mezclar letras (mayúscula y minúscula) y símbolos !.#&?@').isStrongPassword(),
   validateFields
 ] , createUser)
 

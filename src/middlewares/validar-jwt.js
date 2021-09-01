@@ -8,8 +8,8 @@ const validarJWT = ( req, res = response, next ) => {
 
   if ( !token ) {
     return res.status(401).json({
-      ok: false,
-      message: 'No envio el token en su Header'
+      success: false,
+      message: 'No envió el token en su Header'
     })
   }
 
@@ -23,8 +23,8 @@ const validarJWT = ( req, res = response, next ) => {
   } catch (error) {
 
     return res.status(401).json({
-      ok: false,
-      message: 'Token enviado no válido'
+      success: false,
+      message: 'Token enviado no es válido'
     })
 
   }

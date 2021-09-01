@@ -7,7 +7,7 @@ const { generateJWT } = require('../helpers/jwt');
 // Create new User
 const createUser = async ( req, res = response ) => {
 
-  const { firstname, lastname, email, password } = req.body
+  const { firstname, email, password } = req.body
 
   try {
 
@@ -16,8 +16,8 @@ const createUser = async ( req, res = response ) => {
 
   if ( usuario ) {
     return res.status(409).json({
-      ok: false,
-      message: 'El usuario ya existe con este E-mail'
+      success: false,
+      message: 'Este email ya está en uso. Elige otro.'
     })
   }
 
@@ -40,7 +40,7 @@ const createUser = async ( req, res = response ) => {
 
   // Generate successful response
   return res.status(201).json({
-    ok: true,
+    success: true,
     uid: dbUser.id,
     firstname: firstname,
     token: token,
@@ -50,7 +50,7 @@ const createUser = async ( req, res = response ) => {
 
     console.log(error)
     return res.status(500).json({
-      ok: false,
+      success: false,
       message: 'Please contact the administrator'
     })
 
@@ -69,8 +69,8 @@ const logIn = async ( req, res = response ) => {
 
     if ( !dbUser ) {
       return res.status(400).json({
-        ok: false,
-        message: 'El correo no esta registrado'
+        success: false,
+        message: 'Ingresa un correo electrónico válido'
       })
     }
 
@@ -79,8 +79,8 @@ const logIn = async ( req, res = response ) => {
 
     if ( !validPassword ) {
       return res.status(400).json({
-        ok: false,
-        message: 'El Password no es válido'
+        success: false,
+        message: 'La contraseña es incorrecta.'
       })
     }
 
@@ -89,7 +89,7 @@ const logIn = async ( req, res = response ) => {
 
     // Service response
     return res.json({
-      ok: true,
+      success: true,
       uid: dbUser.id,
       firstname: dbUser.firstname,
       token
@@ -98,7 +98,7 @@ const logIn = async ( req, res = response ) => {
   } catch (error) {
       console.log(error)
       return res.status(500).json({
-        ok: false,
+        success: false,
         message: 'Please contact the administrator'
     })
   }
@@ -107,7 +107,7 @@ const logIn = async ( req, res = response ) => {
 
 
 // Generate y/o Refresh TOKEN
-const newToken = async( req, res = response ) => {
+const newToken = async ( req, res = response ) => {
 
   const { uid, firstname } = req
 
@@ -115,7 +115,7 @@ const newToken = async( req, res = response ) => {
   const newtoken = await generateJWT( uid, firstname )
 
   return res.json({
-    ok: true,
+    success: true,
     message: 'Generate New Token',
     uid,
     firstname,
