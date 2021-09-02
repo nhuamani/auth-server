@@ -2,27 +2,27 @@
 
 ## Project
 ### 1. Execute Project _(Dev)_
-  Run `ng serve` for a dev server. `npm run dev`
+  ```npm run dev```
 
 ### 2. Open Porject
 Navigate to `http://localhost:4000/`.
 
 ### 3. Execute Project _(Prod)_
-  `npm run start`
+  ```npm run start```
 
 
 ## DB
 ### 1. Start MongoDB
-  `sudo systemctl start mongod`
+  ```sudo systemctl start mongod```
 
 ### 2. Verify that MongoDB has started successfully
-  `sudo systemctl status mongod`
+  ```sudo systemctl status mongod```
 
 ### 3. Stop MongoDB
-  `sudo systemctl stop mongod`
+  ```sudo systemctl stop mongod```
 
 ### 4. Restart MongoDB
-  `sudo systemctl restart mongod`
+  ```sudo systemctl restart mongod```
 
 
 ## TO-DO list
